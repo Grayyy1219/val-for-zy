@@ -121,7 +121,7 @@
         text-align: center;
         display: flex;
         animation: cardFloat 8s ease-in-out infinite;
-            flex-direction: column;
+        flex-direction: column;
       }
       .carddiv {
         width: 100%;
@@ -214,9 +214,8 @@
         margin-top: 12px;
         font-size: 0.94rem;
         color: var(--text-soft);
-            margin: 20px 70px;
-    font-size: 20px;
-
+        margin: 20px 70px;
+        font-size: 20px;
       }
 
       #autoplayHint {
@@ -314,26 +313,47 @@
             Happy Valentine’s Day, My Zyy.<br />
           </b>
           <br />
-          I know these past few weeks have been difficult for the both of us, and I can feel that things have changed between us. I understand that I’ve probably hurt you alot, especially with that one mistake that made you so sad. I can't undo what I've done zyy.<br />
+          I know these past few weeks have been difficult for the both of us,
+          and I can feel that things have changed between us. I understand that
+          I’ve probably hurt you alot, especially with that one mistake that
+          made you so sad. I can't undo what I've done zyy.<br />
           <br />
-          But I wish I could take it all back, but I can’t. All I can do is keep saying I'm sorry, over and over, hoping na mapatawad ako nung puso mo. Siguro sinasabi na sayo ng iba na you should leave me, but they don’t understand our story, they don’t see the love that we’ve built or how much we value each other. Tayo lang may alam non.<br />
+          But I wish I could take it all back, but I can’t. All I can do is keep
+          saying I'm sorry, over and over, hoping na mapatawad ako nung puso mo.
+          Siguro sinasabi na sayo ng iba na you should leave me, but they don’t
+          understand our story, they don’t see the love that we’ve built or how
+          much we value each other. Tayo lang may alam non.<br />
           <br />
-      
-          If these past na mga pangyayari have changed how you see me, I hope na these memories na makikita mo sa baba reminds you of how deeply I care for you. Gusto ko malaman mo kung gano ko kagusto magbago and to grow for you. I’m sorry for letting you down, for messing up again and again.<br />
+
+          If these past na mga pangyayari have changed how you see me, I hope na
+          these memories na makikita mo sa baba reminds you of how deeply I care
+          for you. Gusto ko malaman mo kung gano ko kagusto magbago and to grow
+          for you. I’m sorry for letting you down, for messing up again and
+          again.<br />
           <br />
           And even if someday everything changes, gusto ko malaman mo na <br />
           <br />
-  
-          Kahit ano man ang mangyari, you will always be my favorite person. Kahit na palagi tayong nag-aaway, it’s always worth it kasi it's with you, whether it’s good or bad. I can’t imagine my life without you, and I’m so thankful na andito ka pa rin. Thank you again for your Valentine's gift. Honestly, I feel like I don’t deserve it, but it means everything to me.<br />
-            <br />
-   
-     So, you may ask, why did I pick this song? I chose "14" by Silent Sanctuary because it speaks so much of how I feel. "Even though we always fight, you're the only one I want to be with. I’ll give everything, and I’ll be with you anywhere, no matter where." Despite everything, you're the only one I want by my side. You are my peace, my safe place, and the one I want to share my world with.<br />
-  
+
+          Kahit ano man ang mangyari, you will always be my favorite person.
+          Kahit na palagi tayong nag-aaway, it’s always worth it kasi it's with
+          you, whether it’s good or bad. I can’t imagine my life without you,
+          and I’m so thankful na andito ka pa rin. Thank you again for your
+          Valentine's gift. Honestly, I feel like I don’t deserve it, but it
+          means everything to me.<br />
+          <br />
+
+          So, you may ask, why did I pick this song? I chose "14" by Silent
+          Sanctuary because it speaks so much of how I feel. "Even though we
+          always fight, you're the only one I want to be with. I’ll give
+          everything, and I’ll be with you anywhere, no matter where." Despite
+          everything, you're the only one I want by my side. You are my peace,
+          my safe place, and the one I want to share my world with.<br />
+
           <br />
           Happy Valentine’s Day, My Zyy.<br />
-     I love you more than words can say. I love you endlessly, Zyy. ❤️<br />
+          I love you more than words can say. I love you endlessly, Zyy. ❤️<br />
           <br />
-          – Kii 
+          – Kii
         </p>
       </div>
 
@@ -354,8 +374,6 @@
     </div>
 
     <script>
-      const FIREBASE_DB_URL =
-        "https://for-mae-default-rtdb.asia-southeast1.firebasedatabase.app";
       const IMAGE_EXT = /\.(png|jpe?g|gif|webp|bmp|svg)(\?.*)?$/i;
       const VIDEO_EXT = /\.(mp4|webm|ogg|mov)(\?.*)?$/i;
 
@@ -383,13 +401,7 @@
         accentHover: "#ff2f71",
       };
 
-      const isColorLike = (value) =>
-        typeof value === "string" && value.trim().length > 0;
-
       function applyPalette(palette) {
-        if (!palette || typeof palette !== "object") return;
-        const rootStyle = document.documentElement.style;
-
         const map = [
           ["--bg-gradient-start", palette.bgStart],
           ["--bg-gradient-end", palette.bgEnd],
@@ -402,176 +414,53 @@
           ["--dot", palette.dot],
           ["--dot-active", palette.dotActive],
         ];
-
-        map.forEach(([key, value]) => {
-          if (isColorLike(value)) rootStyle.setProperty(key, value.trim());
+        map.forEach(([k, v]) => {
+          if (typeof v === "string" && v.trim())
+            document.documentElement.style.setProperty(k, v.trim());
         });
       }
 
-      function normalizePalette(data) {
-        const raw =
-          data?.palette ||
-          data?.colors ||
-          data?.theme ||
-          data?.valentine2?.palette ||
-          data?.valentine2?.colors ||
-          data;
-
-        if (!raw || typeof raw !== "object") return null;
-
-        return {
-          bgStart: raw.bgStart || raw.backgroundStart || raw.background1,
-          bgEnd: raw.bgEnd || raw.backgroundEnd || raw.background2,
-          surface: raw.surface || raw.card || raw.cardBackground,
-          surfaceBorder:
-            raw.surfaceBorder || raw.cardBorder || raw.border || raw.outline,
-          textMain: raw.textMain || raw.text || raw.primaryText,
-          textSoft: raw.textSoft || raw.secondaryText || raw.mutedText,
-          accent: raw.accent || raw.button || raw.primary,
-          accentHover: raw.accentHover || raw.buttonHover || raw.primaryHover,
-          dot: raw.dot,
-          dotActive: raw.dotActive,
-        };
-      }
-
-      async function initFirebasePalette() {
-        const palettePaths = [
-          "valentine2/palette",
-          "valentine2/theme",
-          "palette/valentine2",
-        ];
-
-        for (const path of palettePaths) {
-          try {
-            const res = await fetch(`${FIREBASE_DB_URL}/${path}kenji.json`, {
-              cache: "no-store",
-            });
-
-            if (!res.ok) continue;
-
-            const data = await res.json();
-            const palette = normalizePalette(data);
-            if (palette) {
-              applyPalette({ ...fallbackPalette, ...palette });
-              return;
-            }
-          } catch (error) {
-            console.warn(`[Palette] Could not load ${path}`, error);
-          }
-        }
-
-        applyPalette(fallbackPalette);
-      }
-
-      const normalizeMedia = (
-        raw,
-        fallbackOrder = Number.POSITIVE_INFINITY,
-      ) => {
-        if (!raw) return null;
-        if (typeof raw === "string") {
-          const src = raw.trim();
-          if (!src) return null;
-          return {
-            src,
-            type: VIDEO_EXT.test(src) ? "video" : "image",
-            sortOrder: fallbackOrder,
-          };
-        }
-
-        const src = typeof raw.src === "string" ? raw.src.trim() : "";
-        if (!src) return null;
-        const explicitType = typeof raw.type === "string" ? raw.type : "";
-        const guessedType = VIDEO_EXT.test(src)
-          ? "video"
-          : IMAGE_EXT.test(src)
-            ? "image"
-            : "image";
-
-        const rawOrder = Number(raw.sortOrder);
-        const sortOrder =
-          Number.isFinite(rawOrder) && rawOrder > 0 ? rawOrder : fallbackOrder;
-
-        return {
-          src,
-          type:
-            explicitType === "video" || explicitType === "image"
-              ? explicitType
-              : guessedType,
-          sortOrder,
-        };
-      };
-
-      const parseJsonIfString = (value) => {
+      function parseJsonIfString(value) {
         if (typeof value !== "string") return value;
-        const trimmed = value.trim();
-        if (!trimmed) return value;
-        if (!(trimmed.startsWith("{") || trimmed.startsWith("["))) {
-          return value;
-        }
-
         try {
-          return JSON.parse(trimmed);
+          return JSON.parse(value);
         } catch {
           return value;
         }
-      };
+      }
 
-      const toAssetList = (input) => {
-        if (Array.isArray(input)) {
-          return input.map((item, index) => ({
-            item,
-            fallbackOrder: index + 1,
-          }));
-        }
+      function normalizeMedia(item = {}, fallbackOrder = 1) {
+        const src = item.src || item.url || item.path || "";
+        if (!src) return null;
+        const type = item.type || (VIDEO_EXT.test(src) ? "video" : "image");
+        return {
+          src,
+          type,
+          sortOrder:
+            Number(item.sortOrder) > 0 ? Number(item.sortOrder) : fallbackOrder,
+        };
+      }
 
-        if (input && typeof input === "object") {
-          return Object.entries(input).map(([, item], index) => ({
-            item,
-            fallbackOrder: index + 1,
-          }));
-        }
-
-        return [];
-      };
-
-      async function fetchSlideshowData() {
-        const res = await fetch(
-          `${FIREBASE_DB_URL}/valentine2/slideshow.json`,
-          {
-            cache: "no-store",
-          },
-        );
-
-        if (!res.ok) {
-          throw new Error(`Failed to load slideshow data (${res.status})`);
-        }
-
+      async function loadSlideshowConfig() {
+        const res = await fetch("./slideshow.json", { cache: "no-store" });
+        if (!res.ok)
+          throw new Error(`Failed to load slideshow.json (${res.status})`);
         const data = parseJsonIfString(await res.json());
-        const slideshowData = parseJsonIfString(data?.slideshow) || data;
-        const assetsSource =
-          slideshowData?.assets ??
-          slideshowData?.items ??
-          data?.assets ??
-          data?.items ??
+        const slideshowData =
+          parseJsonIfString(data?.valentine?.slideshow) ||
+          data?.slideshow ||
           data;
-        const assets = toAssetList(assetsSource);
-        const intervalRaw =
-          slideshowData?.intervalMs ??
-          data?.intervalMs ??
-          data?.slideshowIntervalMs;
-
-        const normalizedAssets = assets
-          .map(({ item, fallbackOrder }) => normalizeMedia(item, fallbackOrder))
+        const assets = (slideshowData?.assets || [])
+          .map((item, i) => normalizeMedia(item, i + 1))
           .filter(Boolean)
           .sort((a, b) => a.sortOrder - b.sortOrder);
-
-        return {
-          assets: normalizedAssets,
-          intervalMs:
-            Number.isFinite(Number(intervalRaw)) && Number(intervalRaw) >= 2000
-              ? Number(intervalRaw)
-              : 5000,
-        };
+        const intervalMs =
+          Number(slideshowData?.intervalMs) >= 2000
+            ? Number(slideshowData.intervalMs)
+            : 5000;
+        const palette =
+          data?.valentine?.palette || data?.palette || fallbackPalette;
+        return { assets, intervalMs, palette };
       }
 
       function setGalleryStatus(message) {
@@ -582,28 +471,19 @@
         if (!slideshow || !dotsWrap) return;
         slideshow.innerHTML = "";
         dotsWrap.innerHTML = "";
-        if (slideTimer) {
-          clearInterval(slideTimer);
-          slideTimer = null;
-        }
-
+        if (slideTimer) clearInterval(slideTimer);
         if (!items.length) {
-          setGalleryStatus(
-            "No memories yet. Add assets in Firebase to display them.",
-          );
+          setGalleryStatus("No memories found in slideshow.json.");
           return;
         }
 
-        const slideElements = items.map((item) => {
+        const slides = items.map((item) => {
           const slide = document.createElement("div");
           slide.className = "slide";
-
           const media = document.createElement(
             item.type === "video" ? "video" : "img",
           );
           media.src = item.src;
-          media.setAttribute("aria-hidden", "true");
-
           if (item.type === "video") {
             media.muted = true;
             media.playsInline = true;
@@ -613,82 +493,50 @@
             media.alt = "Memory";
             media.loading = "lazy";
           }
-
           slide.appendChild(media);
           slideshow.appendChild(slide);
           return slide;
         });
 
-        const dots = slideElements.map((_, index) => {
+        const dots = slides.map((_, i) => {
           const dot = document.createElement("button");
           dot.type = "button";
           dot.className = "dot";
-          dot.setAttribute("aria-label", `Show slide ${index + 1}`);
-          dot.addEventListener("click", () => activate(index));
+          dot.setAttribute("aria-label", `Show slide ${i + 1}`);
+          dot.addEventListener("click", () => activate(i));
           dotsWrap.appendChild(dot);
           return dot;
         });
 
         let current = 0;
-
-        function activate(index) {
-          current = index;
-          slideElements.forEach((slide, i) => {
-            const isActive = i === index;
-            slide.classList.toggle("active", isActive);
-            dots[i].classList.toggle("active", isActive);
-
+        function activate(i) {
+          current = i;
+          slides.forEach((slide, idx) => {
+            const active = idx === i;
+            slide.classList.toggle("active", active);
+            dots[idx].classList.toggle("active", active);
             const video = slide.querySelector("video");
             if (!video) return;
-
-            if (isActive) {
-              try {
-                video.currentTime = 0;
-              } catch (error) {
-                console.warn("Unable to reset video time", error);
-              }
+            if (active) {
+              video.currentTime = 0;
               video.play().catch(() => {});
-            } else {
-              video.pause();
-            }
+            } else video.pause();
           });
         }
 
         activate(0);
-        // to change
-        setGalleryStatus(`“I gathered these memories for you ❤️” `);
-
-        if (slideElements.length > 1) {
-          slideTimer = setInterval(() => {
-            activate((current + 1) % slideElements.length);
-          }, intervalMs);
-        }
-      }
-
-      async function initFirebaseSlideshow() {
-        try {
-          const { assets, intervalMs } = await fetchSlideshowData();
-          renderSlideshow(assets, intervalMs);
-        } catch (error) {
-          console.error("[Slideshow]", error);
-          setGalleryStatus("Could not load Firebase slideshow right now.");
-        }
+        setGalleryStatus("I gathered these memories for you ❤️");
+        if (slides.length > 1)
+          slideTimer = setInterval(
+            () => activate((current + 1) % slides.length),
+            intervalMs,
+          );
       }
 
       function createFloatingHearts() {
         if (!ambientLayer) return;
-
         const heartCount = window.innerWidth < 640 ? 30 : 50;
-        // to change
-        const heartChar = [
-          "❤",
-          "♡",
-          "💖",
-          "🌷",
-          "",
-          "💕"
-        ];
-
+        const heartChar = ["❤", "♡", "💖", "🌷", "💕"];
         ambientLayer.innerHTML = "";
         if (foregroundHeartLayer) foregroundHeartLayer.innerHTML = "";
 
@@ -697,7 +545,6 @@
           heart.className = "floating-heart";
           heart.textContent =
             heartChar[Math.floor(Math.random() * heartChar.length)];
-
           heart.style.left = `${Math.random() * 100}%`;
           heart.style.setProperty(
             "--heart-size",
@@ -712,55 +559,33 @@
             "--heart-drift",
             `${-80 + Math.random() * 160}px`,
           );
-
           const isForegroundHeart = Math.random() < 0.28;
-          const targetLayer =
-            isForegroundHeart && foregroundHeartLayer
-              ? foregroundHeartLayer
-              : ambientLayer;
-
-          if (isForegroundHeart) {
-            heart.classList.add("floating-heart--front");
-          }
-
-          targetLayer.appendChild(heart);
+          if (isForegroundHeart) heart.classList.add("floating-heart--front");
+          (isForegroundHeart && foregroundHeartLayer
+            ? foregroundHeartLayer
+            : ambientLayer
+          ).appendChild(heart);
         }
       }
 
       const hideAutoplayHint = () => {
         if (autoplayHint) autoplayHint.style.display = "none";
       };
-
       const attemptSpotifyPlay = () => {
-        if (!spotifyController) return;
-
-        try {
-          spotifyController.play();
-        } catch (error) {
-          console.error("[Spotify] Autoplay failed:", error);
-        }
+        if (spotifyController) spotifyController.play();
       };
-
       const initSpotifyEmbed = (IFrameAPI) => {
         if (!mount || !trackId) return;
-
         mount.innerHTML = "";
         IFrameAPI.createController(
           mount,
           { uri: `spotify:track:${trackId}`, width: "100%", height: 152 },
           (EmbedController) => {
             spotifyController = EmbedController;
-
             attemptSpotifyPlay();
-
-            EmbedController.addListener("playback_started", () => {
-              hideAutoplayHint();
-            });
-
+            EmbedController.addListener("playback_started", hideAutoplayHint);
             EmbedController.addListener("playback_update", (event) => {
-              if (event?.data && !event.data.isPaused) {
-                hideAutoplayHint();
-              }
+              if (event?.data && !event.data.isPaused) hideAutoplayHint();
             });
           },
         );
@@ -770,14 +595,20 @@
         window.__SpotifyIFrameAPI = IFrameAPI;
         initSpotifyEmbed(IFrameAPI);
       };
-
-      if (window.__SpotifyIFrameAPI) {
+      if (window.__SpotifyIFrameAPI)
         initSpotifyEmbed(window.__SpotifyIFrameAPI);
-      }
+
       createFloatingHearts();
       window.addEventListener("resize", createFloatingHearts);
-      initFirebasePalette();
-      initFirebaseSlideshow();
+      loadSlideshowConfig()
+        .then(({ assets, intervalMs, palette }) => {
+          applyPalette({ ...fallbackPalette, ...palette });
+          renderSlideshow(assets, intervalMs);
+        })
+        .catch((error) => {
+          console.error("[Slideshow]", error);
+          setGalleryStatus("Could not load slideshow.json right now.");
+        });
     </script>
   </body>
 </html>
